@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -15,6 +16,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       <h5>Simple Component Create</h5>
+      <Counter></Counter>
       {
         productList.map(pro => <Product prudoctHear={pro}></Product>)
       }
@@ -27,6 +29,19 @@ function App() {
     </div>
   );
 }
+function Counter(){
+  const [count, setState] = useState(0);
+
+
+  return(
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setState(count -1)}>Decrease</button>
+      <button onClick={() =>  setState(count + 1)}>Incress Button</button>
+    </div>
+  )
+}
+
 
 function Product(props){
   const stylehear={
