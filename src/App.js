@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -16,6 +16,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       <h5>Simple Component Create</h5>
+      <DataLoadsystem></DataLoadsystem>
       <Counter></Counter>
       {
         productList.map(pro => <Product prudoctHear={pro}></Product>)
@@ -31,7 +32,6 @@ function App() {
 }
 function Counter(){
   const [count, setState] = useState(0);
-
 
   return(
     <div>
@@ -66,7 +66,26 @@ function Product(props){
   )
 }
 
-
+function DataLoadsystem(){
+  const [userpart, setUserPart] = useState([])
+  useEffect(()=>{
+    // console.log("UserEffect CallBack")
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(res => res.json())
+      .then(data => setUserPart(data))
+  })
+  return(
+    <div>
+      <h1>Data Load System with React</h1>
+      <h2>How many People in this computer: {userpart.length}</h2>
+      <ul>
+        {
+          userpart.map(user => <li>{user.name}</li>)
+        }
+      </ul>
+    </div>
+  )
+}
 export default App;
 
 
